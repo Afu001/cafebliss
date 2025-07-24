@@ -18,10 +18,10 @@ const Index = () => {
 
   // Store configuration
   const [storeConfig] = useLocalStorage('pos-store-config', {
-    name: 'My Store',
-    address: '123 Main Street, City, State 12345',
-    phone: '(555) 123-4567',
-    cashier: 'Cashier'
+    name: '',
+    address: '',
+    phone: '',
+    cashier: ''
   });
 
   const addCategory = (categoryData: Omit<Category, 'id' | 'createdAt'>) => {
