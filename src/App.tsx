@@ -19,8 +19,8 @@ const Index = () => {
   // Store configuration
   const [storeConfig] = useLocalStorage('pos-store-config', {
     name: 'Cafe Bliss',
-    address: 'DHA Phase 1',
-    phone: '(555) 123-4567',
+    address: 'Shop 11, Rooftop Central Park DHA phase 2',
+    phone: '+92 3340505725',
     cashier: 'Baqir'
   });
 

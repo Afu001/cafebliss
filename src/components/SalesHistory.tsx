@@ -71,7 +71,7 @@ export const SalesHistory = ({ sales, onViewReceipt }: SalesHistoryProps) => {
         <div className="bg-yellow-100/50 rounded-lg p-4">
           <h3 className="text-sm font-medium text-slate-600">Average Sale</h3>
           <p className="text-2xl font-bold text-yellow-500">
-            ${getTotalTransactions() > 0 ? (getTotalSales() / getTotalTransactions()).toFixed(2) : '0.00'}
+            PKR{getTotalTransactions() > 0 ? (getTotalSales() / getTotalTransactions()).toFixed(2) : '0.00'}
           </p>
         </div>
       </div>

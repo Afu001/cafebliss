@@ -13,7 +13,7 @@ export const SalesInterface = ({ items, categories, onCompleteSale }: SalesInter
   const [paymentMethod, setPaymentMethod] = useState<'cash' | 'card'>('cash');
   const [discount, setDiscount] = useState(0);
 
-  const TAX_RATE = 0.1; // 10% tax
+  const TAX_RATE = 0.05; // 10% tax
 
   const addToCart = (item: Item) => {
     const existingItem = cart.find(cartItem => cartItem.item.id === item.id);
@@ -189,7 +189,7 @@ export const SalesInterface = ({ items, categories, onCompleteSale }: SalesInter
               <div className="flex-1">
                 <h4 className="font-medium">{cartItem.item.name}</h4>
                 <p className="text-sm text-text-muted">
-                  ${cartItem.item.price.toFixed(2)} each
+                  PKR{cartItem.item.price.toFixed(2)} each
                 </p>
               </div>
               <div className="flex items-center gap-2">
@@ -269,21 +269,21 @@ export const SalesInterface = ({ items, categories, onCompleteSale }: SalesInter
             <div className="border-t pt-4 space-y-2">
               <div className="flex justify-between">
                 <span>Subtotal:</span>
-                <span>${getSubtotal().toFixed(2)}</span>
+                <span>PKR{getSubtotal().toFixed(2)}</span>
               </div>
               {discount > 0 && (
                 <div className="flex justify-between text-success">
                   <span>Discount ({discount}%):</span>
-                  <span>-${getDiscountAmount().toFixed(2)}</span>
+                  <span>-PKR{getDiscountAmount().toFixed(2)}</span>
                 </div>
               )}
               <div className="flex justify-between">
-                <span>Tax (10%):</span>
-                <span>${getTaxAmount().toFixed(2)}</span>
+                <span>Tax (5%):</span>
+                <span>PKR{getTaxAmount().toFixed(2)}</span>
               </div>
               <div className="flex justify-between font-bold text-lg border-t pt-2">
                 <span>Total:</span>
-                <span>${getTotal().toFixed(2)}</span>
+                <span>PKR{getTotal().toFixed(2)}</span>
               </div>
             </div>
 
@@ -308,7 +308,7 @@ const ItemCard = ({ item, onAdd }: { item: Item; onAdd: (item: Item) => void }) 
     className="p-3 border border-border rounded-lg hover:border-primary hover:shadow-md transition-all bg-card text-card-foreground text-left"
   >
     <h4 className="font-medium mb-1">{item.name}</h4>
-    <p className="text-primary font-bold">${item.price.toFixed(2)}</p>
+    <p className="text-primary font-bold">PKR {item.price.toFixed(2)}</p>
     {item.stock !== undefined && (
       <p className="text-xs text-text-muted mt-1">Stock: {item.stock}</p>
     )}

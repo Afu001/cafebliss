@@ -163,7 +163,7 @@ export const ItemManager = ({ items, categories, onAddItem, onDeleteItem }: Item
                       </button>
                     </div>
                     <p className="text-lg font-bold text-primary mb-1">
-                      ${item.price.toFixed(2)}
+                      PKR{item.price.toFixed(2)}
                     </p>
                     {item.stock !== undefined && (
                       <p className="text-sm text-text-muted">Stock: {item.stock}</p>

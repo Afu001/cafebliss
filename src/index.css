@@ -117,6 +117,43 @@
     padding: 4mm;
     background: white !important;
     color: black !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  
+  .receipt * {
+    color: black !important;
+    background: transparent !important;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-only {
+    display: block !important;
+  }
+
+  /* 🆕 Prevent unwanted page breaks */
+  .receipt > * {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  
+  body {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    line-height: 1.2;
+    color: black !important;
+    background: white !important;
+  }
+  
+  .receipt {
+    width: 72mm;
+    margin: 0 auto;
+    padding: 4mm;
+    background: white !important;
+    color: black !important;
   }
   
   .receipt * {

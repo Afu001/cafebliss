@@ -59,11 +59,11 @@ export const Receipt = ({ receipt, onPrint, onClose }: ReceiptProps) => {
               <div key={index} className="text-sm">
                 <div className="flex justify-between">
                   <span>{cartItem.item.name}</span>
-                  <span>${cartItem.item.price.toFixed(2)}</span>
+                  <span>PKR{cartItem.item.price.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between mb-1">
-                  <span className="ml-2">{cartItem.quantity} x ${cartItem.item.price.toFixed(2)}</span>
-                  <span>${(cartItem.item.price * cartItem.quantity).toFixed(2)}</span>
+                  <span className="ml-2">{cartItem.quantity} x PKR{cartItem.item.price.toFixed(2)}</span>
+                  <span>PKR{(cartItem.item.price * cartItem.quantity).toFixed(2)}</span>
                 </div>
               </div>
             ))}
@@ -75,22 +75,22 @@ export const Receipt = ({ receipt, onPrint, onClose }: ReceiptProps) => {
           <div className="text-sm space-y-1">
             <div className="flex justify-between">
               <span>Subtotal:</span>
-              <span>${sale.subtotal.toFixed(2)}</span>
+              <span>PKR{sale.subtotal.toFixed(2)}</span>
             </div>
             {sale.discount > 0 && (
               <div className="flex justify-between">
                 <span>Discount:</span>
-                <span>-${sale.discount.toFixed(2)}</span>
+                <span>-PKR{sale.discount.toFixed(2)}</span>
               </div>
             )}
             <div className="flex justify-between">
               <span>Tax:</span>
-              <span>${sale.tax.toFixed(2)}</span>
+              <span>PKR{sale.tax.toFixed(2)}</span>
             </div>
             <div className="border-t border-black pt-1">
               <div className="flex justify-between font-bold">
                 <span>TOTAL:</span>
-                <span>${sale.total.toFixed(2)}</span>
+                <span>PKR{sale.total.toFixed(2)}</span>
               </div>
             </div>
           </div>
