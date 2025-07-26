@@ -1,3 +1,4 @@
+// Index.tsx
 import { useState } from 'react';
 import type { Category, Item, Sale, Receipt as ReceiptType } from './types/pos';
 import { useLocalStorage } from './hooks/useLocalStorage';
@@ -19,7 +20,7 @@ const Index = () => {
   // Store configuration
   const [storeConfig] = useLocalStorage('pos-store-config', {
     name: 'Cafe Bliss',
-    address: 'Shop 11, Rooftop Central Park DHA phase 2',
+    address: 'Shop 11, Rooftop Central Park DHA phase 2',
     phone: '+92 3340505725',
     cashier: 'Baqir'
   });
@@ -34,7 +35,6 @@ const Index = () => {
   };
 
   const deleteCategory = (id: string) => {
-    // Remove category and all items in that category
     setCategories(categories.filter(cat => cat.id !== id));
     setItems(items.filter(item => item.categoryId !== id));
   };
@@ -62,33 +62,24 @@ const Index = () => {
     };
     
     setSales([...sales, newSale]);
-    
-    // Show receipt
-    const receipt: ReceiptType = {
+
+    setCurrentReceipt({
       sale: newSale,
       storeName: storeConfig.name,
       storeAddress: storeConfig.address,
       storePhone: storeConfig.phone,
       cashier: storeConfig.cashier
-    };
-    
-    setCurrentReceipt(receipt);
-  };
-
-  const printReceipt = () => {
-    window.print();
+    });
   };
 
   const viewReceiptFromHistory = (sale: Sale) => {
-    const receipt: ReceiptType = {
+    setCurrentReceipt({
       sale,
       storeName: storeConfig.name,
       storeAddress: storeConfig.address,
       storePhone: storeConfig.phone,
       cashier: storeConfig.cashier
-    };
-    
-    setCurrentReceipt(receipt);
+    });
   };
 
   return (
@@ -98,7 +89,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-bold text-primary">
-              {storeConfig.name} - POS System By Aswad for Baqir
+              {storeConfig.name} - POS System
             </h1>
             <div className="text-sm text-text-muted">
               {new Date().toLocaleDateString()} | {storeConfig.cashier}
@@ -116,7 +107,7 @@ const Index = () => {
               { id: 'categories', label: 'Categories' },
               { id: 'items', label: 'Items' },
               { id: 'history', label: 'History' }
-            ].map((tab) => (
+            ].map(tab => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as Tab)}
@@ -142,7 +133,6 @@ const Index = () => {
             onCompleteSale={completeSale}
           />
         )}
-
         {activeTab === 'categories' && (
           <CategoryManager
             categories={categories}
@@ -150,7 +140,6 @@ const Index = () => {
             onDeleteCategory={deleteCategory}
           />
         )}
-
         {activeTab === 'items' && (
           <ItemManager
             items={items}
@@ -159,7 +148,6 @@ const Index = () => {
             onDeleteItem={deleteItem}
           />
         )}
-
         {activeTab === 'history' && (
           <SalesHistory
             sales={sales}
@@ -172,7 +160,6 @@ const Index = () => {
       {currentReceipt && (
         <Receipt
           receipt={currentReceipt}
-          onPrint={printReceipt}
           onClose={() => setCurrentReceipt(null)}
         />
       )}

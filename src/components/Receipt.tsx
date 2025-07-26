@@ -1,8 +1,9 @@
+// Receipt.tsx
+import { useState, useEffect } from 'react';
 import type { Receipt as ReceiptType } from '../types/pos';
 
 interface ReceiptProps {
   receipt: ReceiptType;
-  onPrint: () => void;
   onClose: () => void;
 }
 
@@ -83,33 +84,47 @@ const ReceiptContent = ({ receipt }: { receipt: ReceiptType }) => {
   );
 };
 
-export const Receipt = ({ receipt, onPrint, onClose }: ReceiptProps) => {
-  return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg p-6 max-w-md w-full max-h-[90vh] overflow-y-auto">
-        {/* Controls */}
-        <div className="no-print flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold">Receipt Preview</h2>
-          <div className="flex gap-2">
-            <button onClick={onPrint} className="btn btn-primary">
-              Print Receipt
-            </button>
-            <button onClick={onClose} className="btn btn-secondary">
-              Close
-            </button>
-          </div>
-        </div>
+export const Receipt = ({ receipt, onClose }: ReceiptProps) => {
+  const [printing, setPrinting] = useState(false);
 
-        {/* On-screen preview */}
-        <div className="receipt-preview">
+  const handlePrint = () => {
+    setPrinting(true);
+    // wait for DOM update
+    setTimeout(() => {
+      window.print();
+    }, 100);
+  };
+
+  useEffect(() => {
+    const cleanup = () => {
+      setPrinting(false);
+      onClose();
+    };
+    window.onafterprint = cleanup;
+    return () => {
+      window.onafterprint = null;
+    };
+  }, [onClose]);
+
+  return (
+    <div className={printing ? 'print-container' : 'fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4'}>
+      {!printing ? (
+        <div className="bg-white rounded-lg p-6 max-w-md w-full max-h-[90vh] overflow-y-auto">
+          {/* on-screen controls */}
+          <div className="no-print flex justify-between items-center mb-4">
+            <h2 className="text-xl font-bold">Receipt Preview</h2>
+            <div className="flex gap-2">
+              <button onClick={handlePrint} className="btn btn-primary">Print Receipt</button>
+              <button onClick={onClose} className="btn btn-secondary">Close</button>
+            </div>
+          </div>
           <ReceiptContent receipt={receipt} />
         </div>
-      </div>
-
-      {/* Print-only version */}
-      <div className="print-only absolute top-0 left-0 w-[80mm] p-0 m-0 z-0 hidden">
-        <ReceiptContent receipt={receipt} />
-      </div>
+      ) : (
+        <div className="receipt">
+          <ReceiptContent receipt={receipt} />
+        </div>
+      )}
     </div>
   );
 };
