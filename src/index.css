@@ -102,15 +102,34 @@
     size: 80mm auto;
     margin: 0;
   }
-  
-  body {
+
+  html, body {
+    width: 80mm;
+    margin: 0;
+    padding: 0;
     font-family: 'Courier New', monospace;
     font-size: 12px;
     line-height: 1.2;
-    color: black !important;
     background: white !important;
+    color: black !important;
   }
-  
+
+  .no-print,
+  .receipt-preview,
+  .fixed,
+  .inset-0,
+  .z-50 {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+    position: static !important;
+    width: 80mm;
+    margin: 0 auto;
+    padding: 0;
+  }
+
   .receipt {
     width: 72mm;
     margin: 0 auto;
@@ -120,55 +139,18 @@
     page-break-inside: avoid;
     break-inside: avoid;
   }
-  
-  .receipt * {
-    color: black !important;
-    background: transparent !important;
-  }
-  
-  .no-print {
-    display: none !important;
-  }
-  
-  .print-only {
-    display: block !important;
-  }
 
-  /* 🆕 Prevent unwanted page breaks */
   .receipt > * {
     page-break-inside: avoid;
     break-inside: avoid;
   }
-  
-  body {
-    font-family: 'Courier New', monospace;
-    font-size: 12px;
-    line-height: 1.2;
-    color: black !important;
-    background: white !important;
-  }
-  
-  .receipt {
-    width: 72mm;
-    margin: 0 auto;
-    padding: 4mm;
-    background: white !important;
-    color: black !important;
-  }
-  
+
   .receipt * {
     color: black !important;
     background: transparent !important;
   }
-  
-  .no-print {
-    display: none !important;
-  }
-  
-  .print-only {
-    display: block !important;
-  }
 }
+
 
 @layer components {
   .btn {

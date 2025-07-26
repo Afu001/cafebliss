@@ -106,7 +106,7 @@ export const SalesHistory = ({ sales, onViewReceipt }: SalesHistoryProps) => {
                   </div>
                 </td>
                 <td className="py-3 px-2 capitalize">{sale.paymentMethod}</td>
-                <td className="py-3 px-2 text-right font-bold">${sale.total.toFixed(2)}</td>
+                <td className="py-3 px-2 text-right font-bold">PKR {sale.total.toFixed(2)}</td>
                 <td className="py-3 px-2 text-center">
                   <button
                     onClick={() => onViewReceipt(sale)}
